@@ -1,4 +1,5 @@
 const fs = require("fs");
+const ft = require("file-type")
 const { createCanvas, registerFont } = require("canvas");
 const EmojiDbLib = require("emoji-db");
 const { loadImage } = require("canvas");
