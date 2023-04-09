@@ -181,7 +181,7 @@ class QuoteGenerate {
   }
 
   async downloadMediaImage(media, mediaSize, type = "id", crop = true) {
-    let mediaUrl;
+    let mediaUrl = "";
     if (type === "id")
       mediaUrl = await this.telegram.getFileLink(media).catch(console.error);
     const load =
