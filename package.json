@@ -32,7 +32,7 @@
     "koa-response-time": "^2.1.0",
     "koa-router": "^7.4.0",
     "lottie-node": "^2.0.0",
-    "lottie-web": "^5.7.8",
+    "lottie-web": "^5.10.2",
     "lru-cache": "^5.1.1",
     "object-sizeof": "^1.6.0",
     "runes": "^0.4.3",
