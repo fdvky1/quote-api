@@ -1,4 +1,4 @@
-FROM nikolaik/python-nodejs:python3.11-nodejs19 AS builder
+FROM nikolaik/python-nodejs:python3.11-nodejs18 AS builder
 
 ENV NODE_WORKDIR /app
 WORKDIR $NODE_WORKDIR
