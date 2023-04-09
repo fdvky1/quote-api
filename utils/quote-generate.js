@@ -1,5 +1,5 @@
 const fs = require("fs");
-const ft = require("file-type")
+const ft = require("file-type");
 const { createCanvas, registerFont } = require("canvas");
 const EmojiDbLib = require("emoji-db");
 const { loadImage } = require("canvas");
@@ -127,11 +127,11 @@ class QuoteGenerate {
       avatarImage = avatarImageCache;
     } else if (user.photo && user.photo.url) {
       avatarImage = await loadImage(user.photo.url);
-      //add option for create avatar image latters 
-    } else if(user.photo && user.photo.createImageLatters){
+      //add option for create avatar image latters
+    } else if (user.photo && user.photo.createImageLatters) {
       avatarImage = await loadImage(
-          await this.avatarImageLatters(nameLatters, avatarColor)
-        );
+        await this.avatarImageLatters(nameLatters, avatarColor)
+      );
     } else {
       try {
         let userPhoto, userPhotoUrl;
@@ -184,9 +184,12 @@ class QuoteGenerate {
     let mediaUrl;
     if (type === "id")
       mediaUrl = await this.telegram.getFileLink(media).catch(console.error);
-    const load = type === "base64" ? Buffer.from(media, "base64") : await loadImageFromUrl(mediaUrl);
+    const load =
+      type === "base64"
+        ? Buffer.from(media, "base64")
+        : await loadImageFromUrl(mediaUrl);
     let ext;
-    if(type === "base64"){
+    if (type === "base64") {
       ext = (await ft.fromBuffer(load)).ext;
     }
     if (mediaUrl.match(/.tgs/)) {
