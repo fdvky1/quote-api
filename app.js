@@ -33,7 +33,7 @@ app.use(ratelimit({
   max: 20,
   disableHeader: false,
   whitelist: (ctx) => {
-    return ctx.query.botToken === process.env.BOT_TOKEN
+    return (ctx.query.botToken === process.env.BOT_TOKEN || process.env.WHITELIST_IP.split(",").includes(ctx.ip))
   },
   blacklist: (ctx) => {
   }
