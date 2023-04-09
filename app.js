@@ -9,7 +9,7 @@ const app = new Koa()
 
 app.use(logger())
 app.use(responseTime())
-app.use(bodyParser())
+app.use(bodyParser({formLimit: "10mb"}))
 
 const ratelimitВb = new Map()
 
