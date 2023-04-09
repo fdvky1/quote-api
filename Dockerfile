@@ -9,3 +9,5 @@ RUN apt-get update && apt-get install -y build-essential gcc wget git libvips li
 
 
 #RUN npm install canvas-prebuilt && npm install # TODO: canvas crashes if installed via npm install from package.json
+
+CMD ["npm", "start"]
