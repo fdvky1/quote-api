@@ -95,7 +95,7 @@ module.exports = async (parm) => {
 
   let quoteImage
 
-  let { type, format, ext } = parm
+  let { type, format, ext, isWaSticker} = parm
 
   if (!type && ext) type = 'png'
   if (type !== 'image' && canvasQuote.height > 1024 * 2) type = 'png'
