@@ -1031,7 +1031,10 @@ class QuoteGenerate {
       if (message.media.url) {
         type = 'url'
         media = message.media.url
-      } else {
+      } else if(message.media.base64){
+        type = 'base64'
+media = message.media.base64
+      }else{
         type = 'id'
         if (message.media.length > 1) {
           if (crop) media = message.media[1]
