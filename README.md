@@ -2,15 +2,15 @@
 
 [![wakatime](https://wakatime.com/badge/github/LyoSU/quote-api.svg)](https://wakatime.com/badge/github/LyoSU/quote-api)
 
-Апи для генерации Telegram цитат
+API for generating Telegram quotes
 
-## Методы
-##### Создание цитаты
+## Methods
+##### Creating a quote
 ```http
 POST /generate
 ```
 
-Пример JSON запроса:
+Example JSON request:
 ```json
 {
   "type": "quote",
@@ -47,7 +47,7 @@ POST /generate
 }
 ```
 
-Медиа:
+Media:
 ```json
 {
   "type": "quote",
@@ -91,7 +91,7 @@ POST /generate
 }
 ```
 
-Без Telegram
+Without Telegram
 ```json
 {
   "type": "quote",
@@ -121,17 +121,17 @@ POST /generate
 }
 ```
 
-Параметры:
-|  Поле | Тип |  Описание  |
+Parameters:
+|  Field | Type |  Description  |
 | :------------ | :------------ | :------------ |
-|  type | string | Тип выходного изображения. Может быть: quote, image, null |
-|  backgroundColor | string | Цвет фона цитаты. Может быть Hex, название или random для случайного цвета |
-|  messages | array | Массив из сообщений |
-| width | number | Максимальная ширина |
-| height | number | Максимальная высота |
-| scale | number | Маcштаб |
+|  type | string | The type of output image. It can be: quote, image, null |
+|  backgroundColor | string | The background color of the quote. It can be a hex code, name, or "random" for a random color |
+|  messages | array |An array of messages |
+| width | number | The maximum width |
+| height | number | The maximum height|
+| scale | number | The scale |
 
-Пример ответа:
+Example response:
 
 ```json
 {
@@ -146,7 +146,7 @@ POST /generate
 
 ```
 
-## Примеры запросов:
+## Request examples:
 > JavaScript
 ```js
 const axios = require('axios')
