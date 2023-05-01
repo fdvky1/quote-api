@@ -2,15 +2,17 @@
 
 [![wakatime](https://wakatime.com/badge/github/LyoSU/quote-api.svg)](https://wakatime.com/badge/github/LyoSU/quote-api)
 
-Апи для генерации Telegram цитат
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/0K26m0)
 
-## Методы
-##### Создание цитаты
+API for generating Telegram quotes
+
+## Methods
+##### Create a Quote
 ```http
 POST /generate
 ```
 
-Пример JSON запроса:
+JSON request example:
 ```json
 {
   "type": "quote",
@@ -47,7 +49,7 @@ POST /generate
 }
 ```
 
-Медиа:
+Media:
 ```json
 {
   "type": "quote",
@@ -91,8 +93,8 @@ POST /generate
 }
 ```
 
-Без Telegram
-```json
+Without Telegram
+```js
 {
   "type": "quote",
   "format": "png",
@@ -105,6 +107,7 @@ POST /generate
       "entities": [],
       "media": {
         "url": "https://via.placeholder.com/1000"
+        //"base64": "base64 image" // use this if you want to use base64
       },
       "avatar": true,
       "from": {
@@ -112,6 +115,7 @@ POST /generate
         "name": "Mike",
         "photo": {
           "url": "https://via.placeholder.com/100"
+          //"createImageLatters": true // use this if you don't have photo, it will create image of latters
         }
       },
       "text": "Hey",
@@ -121,17 +125,18 @@ POST /generate
 }
 ```
 
-Параметры:
-|  Поле | Тип |  Описание  |
+Options:
+|  Field | Type |  Description  |
 | :------------ | :------------ | :------------ |
-|  type | string | Тип выходного изображения. Может быть: quote, image, null |
-|  backgroundColor | string | Цвет фона цитаты. Может быть Hex, название или random для случайного цвета |
-|  messages | array | Массив из сообщений |
-| width | number | Максимальная ширина |
-| height | number | Максимальная высота |
-| scale | number | Маcштаб |
+|  type | string | The type of the output image. Maybe: quote, image, null |
+|  backgroundColor | string | Quote background color. Can be Hex, name or random for random color |
+|  messages | array | Array of messages |
+| width | number | Max Width |
+| height | number | Max Height |
+| scale | number | Scale |
+| isWaSticker | boolean | resize output to WhatsApp sticker(512*512) |
 
-Пример ответа:
+Response example:
 
 ```json
 {
@@ -146,7 +151,7 @@ POST /generate
 
 ```
 
-## Примеры запросов:
+## Request examples:
 > JavaScript
 ```js
 const axios = require('axios')
