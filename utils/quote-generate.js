@@ -1,4 +1,5 @@
 const fs = require('fs')
+const fileType = require('file-type')
 const { createCanvas, registerFont } = require('canvas')
 const EmojiDbLib = require('emoji-db')
 const { loadImage } = require('canvas')
@@ -178,6 +179,8 @@ class QuoteGenerate {
       avatarImage = avatarImageCache
     } else if (user.photo && user.photo.url) {
       avatarImage = await loadImage(user.photo.url)
+    } else if(user.photo && user.photo.createImageLatters){
+    	avatarImage = await loadImage(await this.avatarImageLatters(nameLatters, avatarColor))
     } else {
       try {
         let userPhoto, userPhotoUrl
@@ -214,10 +217,14 @@ class QuoteGenerate {
   }
 
   async downloadMediaImage (media, mediaSize, type = 'id', crop = true) {
-    let mediaUrl
+    let ext = ''
+    let mediaUrl = ''
     if (type === 'id') mediaUrl = await this.telegram.getFileLink(media).catch(console.error)
-    else mediaUrl = media
-    const load = await loadImageFromUrl(mediaUrl)
+    else if (type === 'url') mediaUrl = media
+    const load = type === 'base64' ? Buffer.from(media, 'base64') : await loadImageFromUrl(mediaUrl)
+    if (type === 'base64') {
+      ext = (await fileType.fromBuffer(load)).ext
+    }
     if (mediaUrl.match(/.tgs/)) {
       const jsonLottie = await this.ungzip(load)
       const canvas = createCanvas(512, 512)
@@ -226,7 +233,7 @@ class QuoteGenerate {
       animation.goToAndStop(middleFrame, true)
 
       return canvas
-    } else if (crop || mediaUrl.match(/.webp/)) {
+    } else if (crop || mediaUrl.match(/.webp/) || ext.match(/webp/)) {
       const imageSharp = sharp(load)
       const imageMetadata = await imageSharp.metadata()
       const sharpPng = await imageSharp.png({ lossless: true, force: true }).toBuffer()
@@ -1043,6 +1050,9 @@ class QuoteGenerate {
       if (message.media.url) {
         type = 'url'
         media = message.media.url
+      } else if (message.media.base64){
+        type = 'base64'
+        media = message.media.base64
       } else {
         type = 'id'
         if (message.media.length > 1) {

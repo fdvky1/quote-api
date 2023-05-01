@@ -64,3 +64,6 @@ assets/fonts/*
 assets/emojis/*
 
 !.gitkeep
+
+yarn.lock
+package-lock.json

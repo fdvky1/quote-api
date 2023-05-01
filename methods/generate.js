@@ -129,7 +129,7 @@ module.exports = async (parm) => {
 
   let quoteImage
 
-  let { type, format, ext } = parm
+  let { type, format, ext, isWaSticker } = parm
 
   if (!type && ext) type = 'png'
   if (type !== 'image' && canvasQuote.height > 1024 * 2) type = 'png'
@@ -152,8 +152,9 @@ module.exports = async (parm) => {
     canvasPaddingCtx.drawImage(canvasImage, 0, 0)
 
     const imageSharp = sharp(canvasPadding.toBuffer())
-
-    if (canvasPadding.height >= canvasPadding.width) imageSharp.resize({ height: maxHeight })
+    if (isWaSticker) {
+      imageSharp.resize({ width: 515, height: 512, fit: "contain", background: {r: 0, g: 0, b: 0, alpha: 0} })
+    } else if (canvasPadding.height >= canvasPadding.width) imageSharp.resize({ height: maxHeight })
     else imageSharp.resize({ width: maxWidth })
 
     if (format === 'png') quoteImage = await imageSharp.png().toBuffer()
