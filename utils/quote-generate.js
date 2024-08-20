@@ -111,7 +111,12 @@ class ColorContrast {
 
 class QuoteGenerate {
   constructor (botToken) {
-    this.telegram = new Telegram(botToken)
+    this.telegram = null
+    try{
+      this.telegram = new Telegram(botToken)
+    }catch(e){
+    }
+    
   }
 
   async avatarImageLatters (letters, color) {
